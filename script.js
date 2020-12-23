@@ -7,7 +7,7 @@ if (!"geolocation" in navigator) {
 function success(pos) {
   position.latitude = pos.coords.latitude;
   position.longitude = pos.coords.longitude;
-  p.textContent = 'Lat: ' + position.latitude + ', Long: ' + position.longitude + ' -- ' + Math.hypot((target.latitude - position.latitude), (target.longitude - position.longitude));
+  p.textContent = 'Lat: ' + position.latitude + ', Long: ' + position.longitude + ' -- ' + Math.hypot((target.latitude - position.latitude), (target.longitude - position.longitude)).toPrecision(6);
   p.style.background = "red"
   setTimeout(()=>{p.style.background = ''}, 100)
 }
