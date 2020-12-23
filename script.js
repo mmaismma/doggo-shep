@@ -1,6 +1,6 @@
 const p = document.getElementById('the-p')
 const addPointButton = document.getElementById('add-point')
-var target, options, position;
+var id, target, options, position;
 if (!"geolocation" in navigator) {
   alert("No geolocation available!");
 }
@@ -32,7 +32,7 @@ options = {
   maximumAge: 0
 };
 
-setInterval(() => {navigator.geolocation.getCurrentPosition(success, error, options)}, 2000)
+id = navigator.geolocation.watchPosition(success, error, options)
 
 function addPoint () {
   target.latitude = position.latitude;
