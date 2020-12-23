@@ -13,8 +13,8 @@ function success(pos) {
   console.log(position)
   
   if (lmc === 4) {
-    position.latitude = position.metaLatitude;
-    position.longitude = position.metaLongitude;
+    position.latitude = position.metaLatitude.reduce((a, b) => a + b, 0);
+    position.longitude = position.metaLongitude.reduce((a, b) => a + b, 0);
     position.metaLatitude = []
     position.metaLongitude = []
     p.textContent = 'Lat: ' + position.latitude + ', Long: ' + position.longitude + ' -- ' + Math.round(Math.hypot((target.latitude - position.latitude), (target.longitude - position.longitude)) * 1000000);
