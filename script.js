@@ -32,7 +32,7 @@ options = {
 
 id = navigator.geolocation.watchPosition(success, error, options);
 
-function addPoint {
+function addPoint () {
   target.latitude = position.latitude;
   target.longitude = position.longitude;
 }
