@@ -1,4 +1,4 @@
-const p = document.getElementById('the-p')[0]
+const p = document.getElementById('the-p')
 const addPointButton = document.getElementById('add-point')
 var id, target, options, position;
 if (!"geolocation" in navigator) {
