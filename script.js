@@ -1,17 +1,23 @@
-const p = document.getElementsByTagName('p')[0]
-var id, target, options;
+const p = document.getElementById('the-p')[0]
+const addPointButton = document.getElementById('add-point')
+var id, target, options, position;
 if (!"geolocation" in navigator) {
   alert("No geolocation available!");
 }
 function success(pos) {
-  target.latitude = pos.coords.latitude;
-  target.longitude = pos.coords.longitude;
-  p.textContent = 'Lat: ' + target.latitude + ', Long: ' + target.longitude;
+  position.latitude = pos.coords.latitude;
+  position.longitude = pos.coords.longitude;
+  p.textContent = 'Lat: ' + position.latitude + ', Long: ' + position.longitude + ' -- ' Math.hypot((target.latitude - position.latitude), (target.longitude - position.longitude));
 }
 
 function error(err) {
   p.textContent = 'ERROR(' + err.code + '): ' + err.message;
 }
+
+position = {
+  latitude : 0,
+  longitude: 0
+};
 
 target = {
   latitude : 0,
@@ -24,6 +30,11 @@ options = {
   maximumAge: 0
 };
 
-alert('rockin')
-
 id = navigator.geolocation.watchPosition(success, error, options);
+
+function addPoint {
+  target.latitude = position.latitude;
+  target.longitude = position.longitude;
+}
+
+addPointButton.onclick = addPoint;
