@@ -7,11 +7,7 @@ let lmc = 0;
 if (!"geolocation" in navigator) {
   alert("No geolocation available!");
 }
-function success(pos) {
-  position.metaLatitude.push(pos.coords.latitude);
-  position.metaLongitude.push(pos.coords.longitude);
-  console.log(position)
-  
+function success(pos) {  
   if (lmc === 4) {
     position.latitude = position.metaLatitude.reduce((a, b) => a + b, 0);
     position.longitude = position.metaLongitude.reduce((a, b) => a + b, 0);
@@ -20,8 +16,13 @@ function success(pos) {
     p.textContent = 'Lat: ' + position.latitude + ', Long: ' + position.longitude + ' -- ' + Math.round(Math.hypot((target.latitude - position.latitude), (target.longitude - position.longitude)) * 1000000);
     p.style.background = "red"
     setTimeout(()=>{p.style.background = ''}, 100)
+    lmc = 0;
+  } else {
+    position.metaLatitude.push(pos.coords.latitude);
+    position.metaLongitude.push(pos.coords.longitude);
+    lmc++
+    console.log(position)
   }
-  lmc === 4 ? lmc = 0 : lmc++
 }
 
 function error(err) {
