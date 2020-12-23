@@ -9,8 +9,8 @@ if (!"geolocation" in navigator) {
 }
 function success(pos) {  
   if (lmc === 4) {
-    position.latitude = position.metaLatitude.reduce((a, b) => a + b, 0);
-    position.longitude = position.metaLongitude.reduce((a, b) => a + b, 0);
+    position.latitude = position.metaLatitude.reduce((a, b) => a + b, 0) / position.metaLatitude.length;
+    position.longitude = position.metaLongitude.reduce((a, b) => a + b, 0) / position.metaLongitude.length;
     position.metaLatitude = []
     position.metaLongitude = []
     p.textContent = 'Lat: ' + position.latitude + ', Long: ' + position.longitude + ' -- ' + Math.round(Math.hypot((target.latitude - position.latitude), (target.longitude - position.longitude)) * 1000000);
