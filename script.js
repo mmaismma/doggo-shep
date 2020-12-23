@@ -24,4 +24,6 @@ options = {
   maximumAge: 0
 };
 
+alert('rockin')
+
 id = navigator.geolocation.watchPosition(success, error, options);
