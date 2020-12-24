@@ -46,7 +46,8 @@ options = {
   maximumAge: 0
 };
 
-setInterval(() => {navigator.geolocation.getCurrentPosition(success, error, options)}, 20)
+//setInterval(() => {navigator.geolocation.getCurrentPosition(success, error, options)}, 20)
+id = navigator.geolocation.getCurrentPosition(success, error, options)
 
 function addPoint () {
   target.latitude = position.latitude;
