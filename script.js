@@ -9,9 +9,9 @@ if (!"geolocation" in navigator) {
 }
 function success(pos) {  
   if (lmc === 4) {
-    let tempArray = position.meta.map(x => {x.accuracy})
-    console.log(tempArray);
-    let accLoc = position[position.indexOf(Math.max(...tempArray))]
+    let tempArray = []
+    position.meta.forEach((i) => {tempArray.push(i.accuracy)})
+    let accLoc = position.meta[tempArray.indexOf(Math.max(...tempArray))]
     //position.latitude = position.metaLatitude.reduce((a, b) => a + b, 0) / position.metaLatitude.length;
     //position.longitude = position.metaLongitude.reduce((a, b) => a + b, 0) / position.metaLongitude.length;
     position.meta = [];
