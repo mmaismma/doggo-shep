@@ -11,11 +11,18 @@ function success(pos) {
   if (lmc === 4) {
     let tempArray = []
     position.meta.forEach((i) => {tempArray.push(i.accuracy)})
-    let accLoc = position.meta[tempArray.indexOf(Math.max(...tempArray))]
+    position.latitude = position.meta[tempArray.indexOf(Math.max(...tempArray))].latitude;
+    position.longitude = position.meta[tempArray.indexOf(Math.max(...tempArray))].longitude;
     //position.latitude = position.metaLatitude.reduce((a, b) => a + b, 0) / position.metaLatitude.length;
     //position.longitude = position.metaLongitude.reduce((a, b) => a + b, 0) / position.metaLongitude.length;
     position.meta = [];
-    p.textContent = 'Lat: ' + accLoc.latitude + ', Long: ' + accLoc.longitude + ' -- ' + pos.coords.accuracy + ' -- ' + Math.round(Math.hypot((target.latitude - accLoc.latitude), (target.longitude - accLoc.longitude)) * 1000000);
+    p.textContent = 'Lat: ' + 
+      position.latitude + ', Long: ' + 
+      position.longitude + ' -- ' + 
+      pos.coords.accuracy + ' -- ' + 
+      Math.round(Math.hypot((target.latitude - position.latitude), 
+        (target.longitude - position.longitude)) * 1000000);
+        
     p.style.background = "red"
     setTimeout(()=>{p.style.background = ''}, 100)
     lmc = 0;
