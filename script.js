@@ -9,17 +9,18 @@ if (!"geolocation" in navigator) {
 }
 function success(pos) {  
   if (lmc === 4) {
-    position.latitude = position.metaLatitude.reduce((a, b) => a + b, 0) / position.metaLatitude.length;
-    position.longitude = position.metaLongitude.reduce((a, b) => a + b, 0) / position.metaLongitude.length;
-    position.metaLatitude = []
-    position.metaLongitude = []
-    p.textContent = 'Lat: ' + position.latitude + ', Long: ' + position.longitude + ' -- ' + pos.coords.accuracy + ' -- ' + Math.round(Math.hypot((target.latitude - position.latitude), (target.longitude - position.longitude)) * 1000000);
+    let tempArray = position.meta.map(x => {x.accuracy})
+    console.log(tempArray);
+    let accLoc = position[position.indexOf(Math.max(...tempArray))]
+    //position.latitude = position.metaLatitude.reduce((a, b) => a + b, 0) / position.metaLatitude.length;
+    //position.longitude = position.metaLongitude.reduce((a, b) => a + b, 0) / position.metaLongitude.length;
+    position.meta = [];
+    p.textContent = 'Lat: ' + accLoc.latitude + ', Long: ' + accLoc.longitude + ' -- ' + pos.coords.accuracy + ' -- ' + Math.round(Math.hypot((target.latitude - accLoc.latitude), (target.longitude - accLoc.longitude)) * 1000000);
     p.style.background = "red"
     setTimeout(()=>{p.style.background = ''}, 100)
     lmc = 0;
   } else {
-    position.metaLatitude.push(pos.coords.latitude);
-    position.metaLongitude.push(pos.coords.longitude);
+    position.meta.push(pos.coords);
     lmc++
   }
 }
@@ -29,8 +30,7 @@ function error(err) {
 }
 
 position = {
-  metaLatitude : [],
-  metaLongitude: [],
+  meta: [],
   latitude : 0,
   longitude: 0
 };
