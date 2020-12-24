@@ -47,7 +47,7 @@ options = {
 };
 
 //setInterval(() => {navigator.geolocation.getCurrentPosition(success, error, options)}, 20)
-id = navigator.geolocation.getCurrentPosition(success, error, options)
+id = navigator.geolocation.watchPosition(success, error, options)
 
 function addPoint () {
   target.latitude = position.latitude;
